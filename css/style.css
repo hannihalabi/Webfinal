@@ -372,6 +372,10 @@ button {
     margin-right: auto;
 }
 
+.lang-toggle--mobile {
+    display: none;
+}
+
 .lang-btn {
     display: inline-flex;
     align-items: center;
@@ -412,7 +416,8 @@ button {
 }
 
 /* Audience Selector */
-.audience-selector {
+.audiance-class,
+.marketing-class {
     padding: var(--spacing-lg) 0;
 }
 
@@ -507,6 +512,25 @@ button {
     display: inline-block;
 }
 
+.audience-list-subtitle {
+    margin-top: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.audience-video {
+    display: block;
+    width: min(100%, 520px);
+    height: auto;
+    margin: 0.75rem auto 0;
+    border-radius: 40px;
+    box-shadow: 0 12px 30px rgba(135, 51, 85, 0.18);
+    object-fit: cover;
+}
+
+.audience-video--fashion {
+    border-radius: 45px;
+}
+
 .audience-lottie {
     margin-top: 0.75rem;
     display: flex;
@@ -527,6 +551,15 @@ button {
     font-size: 1rem;
     font-weight: 500;
     line-height: 1.6;
+}
+
+.audience-price-list {
+    display: grid;
+    gap: 0.5rem;
+}
+
+.audience-price-item {
+    font-size: 0.95rem;
 }
 
 /* Creators Grid */
@@ -1093,6 +1126,16 @@ button {
         display: flex;
     }
 
+    .lang-toggle--hero {
+        display: none;
+    }
+
+    .lang-toggle--mobile {
+        display: flex;
+        margin: 0 0.75rem 0 auto;
+        padding: 0.25rem;
+    }
+
     .hero {
         min-height: 100vh;
         min-height: 100dvh;
@@ -1108,7 +1151,7 @@ button {
 
     .audience-tabs {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: repeat(3, 1fr);
         align-items: stretch;
         max-width: 520px;
         margin-left: auto;
@@ -1118,6 +1161,10 @@ button {
     .audience-tab {
         width: 100%;
         padding: 0.85rem 0.9rem;
+    }
+
+    .audience-list-subtitle {
+        margin-top: 20px;
     }
 
     /* Faster logo loop on mobile (Sponsors only) */

@@ -24,7 +24,7 @@
         <div class="container">
             <div class="header-content">
                 <a href="/" class="logo">
-                    <div class="logo-main">PUSH IT AGENCY</div>
+                    <div class="logo-main">Webie</div>
                 </a>
 
                 <nav class="nav" id="nav">
@@ -38,6 +38,17 @@
                 <div class="header-actions">
                     <a href="#contact" class="btn-link" data-i18n="nav.contact">Kontakta oss</a>
                     <a href="#login" class="btn-login" data-i18n="nav.login">Logga in</a>
+                </div>
+
+                <div class="lang-toggle lang-toggle--mobile" aria-label="Välj språk">
+                    <button class="lang-btn is-active" type="button" data-lang="sv" aria-pressed="true">
+                        <span role="img" aria-hidden="true">🇸🇪</span>
+                        <span class="sr-only">Svenska</span>
+                    </button>
+                    <button class="lang-btn" type="button" data-lang="en" aria-pressed="false">
+                        <span role="img" aria-hidden="true">🇬🇧</span>
+                        <span class="sr-only">English</span>
+                    </button>
                 </div>
 
                 <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
@@ -65,15 +76,14 @@
     <!-- Hero Section -->
     <section class="hero">
         <video class="hero-video" id="heroVideo" autoplay muted playsinline>
-            <source src="pushit1.mp4" type="video/mp4">
+            <source src="hero1.mp4" type="video/mp4">
         </video>
         <div class="hero-overlay"></div>
         <div class="container">
             <h1 class="hero-title fade-in">
-                <span class="hero-title-line">You create.</span>
-                <span class="hero-title-line">We push it.</span>
+                <span class="hero-title-line">Brand ready. Market clarity.</span>
             </h1>
-            <div class="lang-toggle" aria-label="Välj språk">
+            <div class="lang-toggle lang-toggle--hero" aria-label="Välj språk">
                 <button class="lang-btn is-active" type="button" data-lang="sv" aria-pressed="true">
                     <span role="img" aria-hidden="true">🇸🇪</span>
                     <span class="sr-only">Svenska</span>
@@ -87,63 +97,243 @@
     </section>
 
     <!-- Audience Selector -->
-    <section class="audience-selector fade-in-scroll" id="audience">
+    <section class="audiance-class fade-in-scroll" id="audience">
         <div class="container">
             <div class="audience-card">
                 <div class="audience-header">
-                    <h2 class="audience-title" data-i18n="audience.title">Välj din väg</h2>
-                    <p class="audience-subtitle" data-i18n="audience.subtitle">Är du kreatör eller ett företag som
-                        söker influencer-marknadsföring?</p>
+                    <h2 class="audience-title">Uppgradera hemsida</h2>
+                    <p class="audience-subtitle">Nedan kan du välja och se skillnaden på
+                        olika format på hemsidor som passar ert varumärke bäst</p>
                 </div>
 
                 <div class="audience-tabs" role="tablist" aria-label="Välj målgrupp">
                     <button class="audience-tab is-active" type="button" role="tab" aria-selected="true"
-                        aria-controls="audience-panel-creators" id="audience-tab-creators" data-audience="creators"
-                        data-i18n="audience.tab.creators">
-                        Jag är kreatör
+                        aria-controls="audience-panel-seller" id="audience-tab-seller" data-audience="audience-seller"
+                       >
+                        Seller
                     </button>
                     <button class="audience-tab" type="button" role="tab" aria-selected="false"
-                        aria-controls="audience-panel-companies" id="audience-tab-companies" data-audience="companies"
-                        data-i18n="audience.tab.companies">
-                        För företag
+                        aria-controls="audience-panel-fashion" id="audience-tab-fashion" data-audience="audience-fashion"
+                       >
+                        Fashion
+                    </button>
+                    <button class="audience-tab" type="button" role="tab" aria-selected="false"
+                        aria-controls="audience-panel-webgl" id="audience-tab-webgl" data-audience="audience-webgl"
+                       >
+                        3D
                     </button>
                 </div>
 
                 <div class="audience-panels">
-                    <div class="audience-panel is-active" role="tabpanel" tabindex="0" id="audience-panel-creators"
-                        aria-labelledby="audience-tab-creators" data-audience-panel="creators">
+                    <div class="audience-panel is-active" role="tabpanel" tabindex="0" id="audience-panel-seller"
+                        aria-labelledby="audience-tab-seller" data-audience-panel="audience-seller">
                         <ul class="audience-list">
                             <li>
-                                <div class="audience-list-text" data-i18n="audience.creators.money">Tjäna pengar på din
-                                    kreativitet</div>
+                                <div class="audience-list-text">Stilrent, pålitligt
+                                    och fokuserat på det som får kunder att agera.</div>
+                                <video class="audience-video" src="modern.mov" autoplay muted loop playsinline></video>
+                                <div class="audience-list-text audience-list-subtitle">
+                                    Vad kostar det?
+                                </div>
                                 <div class="audience-lottie" aria-hidden="true">
                                     <dotlottie-player src="Money.lottie" background="transparent" speed="1" loop
                                         autoplay></dotlottie-player>
                                 </div>
-                                <p class="audience-lottie-caption" data-i18n="audience.creators.caption">Gör ditt
-                                    inflytande till inkomst – varumärken betalar
-                                    för innehåll som träffar rätt.</p>
+                                <p class="audience-lottie-caption">Ändra på kläder på modeller</p>
                             </li>
                             <li>
-                                <div class="audience-list-text" data-i18n="audience.creators.apply">Ansök till vårt
-                                    team nu</div>
+                                <div class="audience-list-text">Boka ett gratis
+                                    möte med oss</div>
                                 <div class="audience-lottie" aria-hidden="true">
                                     <dotlottie-player src="orange hearts.lottie" background="transparent" speed="1"
                                         loop autoplay></dotlottie-player>
                                 </div>
-                                <p class="audience-lottie-caption" data-i18n="audience.creators.applyCaption">Gå med i
-                                    PUSH IT och matchas med betalda kampanjer
-                                    som passar din stil.</p>
+                                <a href="#contact" class="btn-primary">Jag vill
+                                    boka möte</a>
                             </li>
                         </ul>
                     </div>
 
-                    <div class="audience-panel" role="tabpanel" tabindex="0" id="audience-panel-companies"
-                        aria-labelledby="audience-tab-companies" hidden data-audience-panel="companies">
+                    <div class="audience-panel" role="tabpanel" tabindex="0" id="audience-panel-fashion"
+                        aria-labelledby="audience-tab-fashion" hidden data-audience-panel="audience-fashion">
                         <ul class="audience-list">
-                            <li data-i18n="audience.companies.get">Hitta rätt influencer och marknadsför dina produkter
+                            <li>
+                                <div class="audience-list-text">Elegant layout
+                                    som skapar känsla och stärker varumärkets uttryck i varje stilren detalj</div>
+                                <video class="audience-video audience-video--fashion" src="fashion.mov" autoplay muted
+                                    loop playsinline></video>
+                                <div class="audience-list-text audience-list-subtitle">
+                                    Vad kostar det?
+                                </div>
+                                <div class="audience-lottie" aria-hidden="true">
+                                    <dotlottie-player src="Money.lottie" background="transparent" speed="1" loop
+                                        autoplay></dotlottie-player>
+                                </div>
+                                <p class="audience-lottie-caption">
+                                    <span>För att göra det så enkelt som möjligt har vi fasta priser á la</span><br>
+                                    <span>5000 kr för en SELLER-hemsida</span>
+                                </p>
+                                <div class="audience-lottie" aria-hidden="true">
+                                    <dotlottie-player src="orange hearts.lottie" background="transparent" speed="1"
+                                        loop autoplay></dotlottie-player>
+                                </div>
+                                <a href="#contact" class="btn-primary">Jag vill
+                                    boka möte</a>
                             </li>
-                            <li data-i18n="audience.companies.contact">Kontakta oss för mer info</li>
+                        </ul>
+                    </div>
+
+                    <div class="audience-panel" role="tabpanel" tabindex="0" id="audience-panel-webgl"
+                        aria-labelledby="audience-tab-webgl" hidden data-audience-panel="audience-webgl">
+                        <ul class="audience-list">
+                            <li>
+                                <div class="audience-list-text">Ett tidlöst upplägg
+                                    med 3D-element och genomtänkta detaljer som stärker varumärkeskännedom och driver
+                                    konvertering.</div>
+                                <video class="audience-video" src="3D.mov" autoplay muted loop playsinline></video>
+                                <div class="audience-list-text audience-list-subtitle">
+                                    Vad kostar det?
+                                </div>
+                                <div class="audience-lottie" aria-hidden="true">
+                                    <dotlottie-player src="Money.lottie" background="transparent" speed="1" loop
+                                        autoplay></dotlottie-player>
+                                </div>
+                                <p class="audience-lottie-caption">
+                                    <span>För att göra det så enkelt som möjligt har vi fasta priser á la</span><br>
+                                    <span>5000 kr för en SELLER-hemsida</span>
+                                </p>
+                                <div class="audience-lottie" aria-hidden="true">
+                                    <dotlottie-player src="orange hearts.lottie" background="transparent" speed="1"
+                                        loop autoplay></dotlottie-player>
+                                </div>
+                                <a href="#contact" class="btn-primary">Jag vill
+                                    boka möte</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Marketing Selector -->
+    <section class="marketing-class fade-in-scroll" id="marketing">
+        <div class="container">
+            <div class="audience-card">
+                <div class="audience-header">
+                    <h2 class="audience-title">Marknadsföring</h2>
+                    <p class="audience-subtitle">Olika paket inom marknadsföring passar
+                        olika behov, nedan finns tre alternativ av paket</p>
+                </div>
+
+                <div class="audience-tabs" role="tablist" aria-label="Välj målgrupp">
+                    <button class="audience-tab is-active" type="button" role="tab" aria-selected="true"
+                        aria-controls="marketing-panel-seller" id="marketing-tab-seller" data-audience="marketing-seller"
+                       >
+                        SEO
+                    </button>
+                    <button class="audience-tab" type="button" role="tab" aria-selected="false"
+                        aria-controls="marketing-panel-fashion" id="marketing-tab-fashion"
+                        data-audience="marketing-fashion">
+                        ADS
+                    </button>
+                    <button class="audience-tab" type="button" role="tab" aria-selected="false"
+                        aria-controls="marketing-panel-webgl" id="marketing-tab-webgl" data-audience="marketing-webgl"
+                       >
+                        UGC
+                    </button>
+                </div>
+
+                <div class="audience-panels">
+                    <div class="audience-panel is-active" role="tabpanel" tabindex="0" id="marketing-panel-seller"
+                        aria-labelledby="marketing-tab-seller" data-audience-panel="marketing-seller">
+                        <ul class="audience-list">
+                            <li>
+                                <div class="audience-list-text">Stilrent, pålitligt
+                                    och fokuserat på det som får kunder att agera.</div>
+                                <video class="audience-video" src="SEO-explainer.mp4" autoplay muted loop playsinline></video>
+                                <div class="audience-list-text audience-list-subtitle">
+                                    Vad kostar det?
+                                </div>
+                                <div class="audience-lottie" aria-hidden="true">
+                                    <dotlottie-player src="Money.lottie" background="transparent" speed="1" loop
+                                        autoplay></dotlottie-player>
+                                </div>
+                                <p class="audience-lottie-caption">
+                                    <span>För att göra det så enkelt som
+                                        möjligt har vi fasta priser á la</span><br>
+                                    <span>5000 kr för en
+                                        SELLER-hemsida</span>
+                                </p>
+                            </li>
+                            <li>
+                                <div class="audience-list-text">Boka ett gratis
+                                    möte med oss</div>
+                                <div class="audience-lottie" aria-hidden="true">
+                                    <dotlottie-player src="orange hearts.lottie" background="transparent" speed="1"
+                                        loop autoplay></dotlottie-player>
+                                </div>
+                                <a href="#contact" class="btn-primary">Jag vill
+                                    boka möte</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="audience-panel" role="tabpanel" tabindex="0" id="marketing-panel-fashion"
+                        aria-labelledby="marketing-tab-fashion" hidden data-audience-panel="marketing-fashion">
+                        <ul class="audience-list">
+                            <li>
+                                <div class="audience-list-text">Elegant layout
+                                    som skapar känsla och stärker varumärkets uttryck i varje stilren detalj</div>
+                                <video class="audience-video audience-video--fashion" src="Ads-explainer.mp4" autoplay
+                                    muted loop playsinline></video>
+                                <div class="audience-list-text audience-list-subtitle">
+                                    Vad kostar det?
+                                </div>
+                                <div class="audience-lottie" aria-hidden="true">
+                                    <dotlottie-player src="Money.lottie" background="transparent" speed="1" loop
+                                        autoplay></dotlottie-player>
+                                </div>
+                                <p class="audience-lottie-caption">
+                                    <span>För att göra det så enkelt som
+                                        möjligt har vi fasta priser á la</span><br>
+                                    <span>5000 kr för en
+                                        SELLER-hemsida</span>
+                                </p>
+                                <div class="audience-lottie" aria-hidden="true">
+                                    <dotlottie-player src="orange hearts.lottie" background="transparent" speed="1"
+                                        loop autoplay></dotlottie-player>
+                                </div>
+                                <a href="#contact" class="btn-primary">Jag vill
+                                    boka möte</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="audience-panel" role="tabpanel" tabindex="0" id="marketing-panel-webgl"
+                        aria-labelledby="marketing-tab-webgl" hidden data-audience-panel="marketing-webgl">
+                        <ul class="audience-list">
+                            <li>
+                                <div class="audience-list-text">Ett tidlöst upplägg
+                                    med 3D-element och genomtänkta detaljer som stärker varumärkeskännedom och driver
+                                    konvertering.</div>
+                                <video class="audience-video" src="UGC1.mp4" autoplay muted playsinline></video>
+                                <div class="audience-list-text audience-list-subtitle"
+                                   >Cloth swap</div>
+                                <video class="audience-video" src="clothswap.mp4" autoplay muted playsinline></video>
+                                <p class="audience-lottie-caption">
+                                    <span>För att göra det så enkelt som
+                                        möjligt har vi fasta priser á la</span><br>
+                                    <span>5000 kr för en
+                                        SELLER-hemsida</span>
+                                </p>
+                                <div class="audience-lottie" aria-hidden="true">
+                                    <dotlottie-player src="orange hearts.lottie" background="transparent" speed="1"
+                                        loop autoplay></dotlottie-player>
+                                </div>
+                                <a href="#contact" class="btn-primary">Jag vill
+                                    boka möte</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -444,7 +634,7 @@
             </div>
 
             <div class="footer-bottom">
-                <p class="footer-copyright">© PUSH IT AGENCY AB 2024</p>
+                <p class="footer-copyright">© Webie AB 2024</p>
                 <p class="footer-powered"><span data-i18n="footer.powered">Drivs av</span> <a href="https://www.webie.se/" target="_blank"
                         rel="noopener">Webie</a></p>
                 <a href="#privacy" class="footer-privacy" data-i18n="footer.privacy">Integritet & Cookies</a>

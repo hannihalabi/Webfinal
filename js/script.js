@@ -8,26 +8,46 @@ const translations = {
     'nav.apply': { sv: 'ANSÖK NU', en: 'APPLY NOW' },
     'nav.contact': { sv: 'KONTAKTA OSS', en: 'CONTACT' },
     'nav.login': { sv: 'LOGGA IN', en: 'LOG IN' },
-    'audience.title': { sv: 'Välj din väg', en: 'Choose your path' },
+    'audience.title': { sv: 'Uppgradera hemsida', en: 'Upgrade your website' },
+    'marketing.title': { sv: 'Marknadsföring', en: 'Marketing' },
+    'marketing.subtitle': {
+        sv: 'Olika paket inom marknadsföring passar olika behov, nedan finns tre alternativ av paket',
+        en: 'Different marketing packages suit different needs; below are three package options.'
+    },
+    'marketing.tab.seo': { sv: 'SEO', en: 'SEO' },
+    'marketing.tab.ads': { sv: 'ADS', en: 'ADS' },
+    'marketing.tab.ugc': { sv: 'UGC', en: 'UGC' },
+    'marketing.ugc.subtitle': { sv: 'Cloth swap', en: 'Cloth swap' },
+    'marketing.ugc.faceSwapTitle': { sv: 'Face swap', en: 'Face swap' },
     'audience.subtitle': {
-        sv: 'Är du kreatör eller ett företag som söker influencer-marknadsföring?',
-        en: 'Are you a creator, or a company looking for influencer marketing?'
+        sv: 'Nedan kan du välja och se skillnaden på olika format på hemsidor som passar ert varumärke bäst',
+        en: 'Choose below to see the differences between website formats that fit your brand best.'
     },
-    'audience.tab.creators': { sv: 'Jag är kreatör', en: "I'm a creator" },
-    'audience.tab.companies': { sv: 'För företag', en: 'For companies' },
-    'audience.creators.money': { sv: 'Tjäna pengar på din kreativitet', en: 'Earn money on your creativity' },
-    'audience.creators.caption': {
-        sv: 'Gör ditt inflytande till inkomst – varumärken betalar för innehåll som träffar rätt.',
-        en: 'Turn your influence into income — brands pay for content that connects.'
+    'audience.tab.seller': { sv: 'Seller', en: 'Seller' },
+    'audience.tab.fashion': { sv: 'Fashion', en: 'Fashion' },
+    'audience.tab.webgl': { sv: '3D', en: '3D' },
+    'audience.creators.money': { sv: 'Stilrent, pålitligt och fokuserat på det som får kunder att agera.', en: 'Clean, reliable, and focused on what gets customers to act.' },
+    'audience.creators.cost': { sv: 'Vad kostar det?', en: 'What does it cost?' },
+    'audience.creators.priceNoteStart': {
+        sv: 'För att göra det så enkelt som möjligt har vi fasta priser á la',
+        en: 'To keep things simple, we offer fixed pricing of'
     },
-    'audience.creators.apply': { sv: 'Ansök till vårt team nu', en: 'Apply to our team now' },
-    'audience.creators.applyCaption': {
-        sv: 'Gå med i PUSH IT och matchas med betalda kampanjer som passar din stil.',
-        en: 'Join PUSH IT and get matched with paid campaigns that fit your style.'
+    'audience.creators.priceNoteEnd': {
+        sv: '5000 kr för en SELLER-hemsida',
+        en: '5000 SEK for a SELLER website.'
+    },
+    'audience.creators.apply': { sv: 'Boka ett gratis möte med oss', en: 'Book a free meeting with us' },
+    'audience.creators.applyCta': {
+        sv: 'Jag vill boka möte',
+        en: 'I want to book a meeting'
+    },
+    'audience.fashion.description': {
+        sv: 'Elegant layout som skapar känsla och stärker varumärkets uttryck i varje stilren detalj',
+        en: 'Elegant layouts that create feeling and reinforce brand expression in every clean detail.'
     },
     'audience.companies.get': {
-        sv: 'Hitta rätt influencer och marknadsför dina produkter',
-        en: 'Get your influencer and market your products'
+        sv: 'Ett tidlöst upplägg med 3D-element och genomtänkta detaljer som stärker varumärkeskännedom och driver konvertering.',
+        en: 'A timeless setup with 3D elements and thoughtful details that build brand awareness and drive conversion.'
     },
     'audience.companies.contact': {
         sv: 'Kontakta oss för mer info',
@@ -237,44 +257,50 @@ function applyTranslations() {
 }
 
 function initAudienceSelector() {
-    const tabs = Array.from(document.querySelectorAll('.audience-tab'));
-    const panels = Array.from(document.querySelectorAll('[data-audience-panel]'));
+    const cards = Array.from(document.querySelectorAll('.audience-card'));
 
-    if (!tabs.length || !panels.length) return;
+    if (!cards.length) return;
 
-    function setActive(audience) {
+    cards.forEach(card => {
+        const tabs = Array.from(card.querySelectorAll('.audience-tab'));
+        const panels = Array.from(card.querySelectorAll('[data-audience-panel]'));
+
+        if (!tabs.length || !panels.length) return;
+
+        function setActive(audience) {
+            tabs.forEach(tab => {
+                const isActive = tab.dataset.audience === audience;
+                tab.classList.toggle('is-active', isActive);
+                tab.setAttribute('aria-selected', String(isActive));
+                tab.tabIndex = isActive ? 0 : -1;
+            });
+
+            panels.forEach(panel => {
+                const isActive = panel.dataset.audiencePanel === audience;
+                panel.classList.toggle('is-active', isActive);
+                panel.hidden = !isActive;
+            });
+        }
+
         tabs.forEach(tab => {
-            const isActive = tab.dataset.audience === audience;
-            tab.classList.toggle('is-active', isActive);
-            tab.setAttribute('aria-selected', String(isActive));
-            tab.tabIndex = isActive ? 0 : -1;
+            tab.addEventListener('click', () => setActive(tab.dataset.audience));
+            tab.addEventListener('keydown', (e) => {
+                if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+                e.preventDefault();
+
+                const currentIndex = tabs.indexOf(tab);
+                const nextIndex = e.key === 'ArrowRight'
+                    ? (currentIndex + 1) % tabs.length
+                    : (currentIndex - 1 + tabs.length) % tabs.length;
+
+                tabs[nextIndex].focus();
+                setActive(tabs[nextIndex].dataset.audience);
+            });
         });
 
-        panels.forEach(panel => {
-            const isActive = panel.dataset.audiencePanel === audience;
-            panel.classList.toggle('is-active', isActive);
-            panel.hidden = !isActive;
-        });
-    }
-
-    tabs.forEach(tab => {
-        tab.addEventListener('click', () => setActive(tab.dataset.audience));
-        tab.addEventListener('keydown', (e) => {
-            if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
-            e.preventDefault();
-
-            const currentIndex = tabs.indexOf(tab);
-            const nextIndex = e.key === 'ArrowRight'
-                ? (currentIndex + 1) % tabs.length
-                : (currentIndex - 1 + tabs.length) % tabs.length;
-
-            tabs[nextIndex].focus();
-            setActive(tabs[nextIndex].dataset.audience);
-        });
+        const defaultTab = tabs.find(t => t.classList.contains('is-active')) || tabs[0];
+        setActive(defaultTab.dataset.audience);
     });
-
-    const defaultTab = tabs.find(t => t.classList.contains('is-active')) || tabs[0];
-    setActive(defaultTab.dataset.audience);
 }
 
 // Video Playlist - Play videos sequentially
@@ -283,7 +309,7 @@ function initVideoPlaylist() {
 
     if (!heroVideo) return;
 
-    const videoPlaylist = ['pushit1.mp4', 'pushit2.mp4', 'pushit3.mp4', 'pushit4.mp4'];
+    const videoPlaylist = ['hero1.mp4', 'hero2.mp4', 'hero3.mp4', 'hero4.mp4'];
     let currentVideoIndex = 0;
 
     heroVideo.addEventListener('ended', function () {
@@ -296,6 +322,7 @@ function initVideoPlaylist() {
         heroVideo.play();
     });
 }
+
 
 // Mobile Menu Toggle
 function initMobileMenu() {
