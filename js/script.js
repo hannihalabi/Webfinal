@@ -1,12 +1,14 @@
-// =================================================
+﻿// =================================================
 // BOFFO Agency - JavaScript
 // =================================================
 
 const translations = {
-    'nav.creators': { sv: 'KREATÖRER', en: 'CREATORS' },
-    'nav.about': { sv: 'OM OSS', en: 'ABOUT US' },
-    'nav.apply': { sv: 'ANSÖK NU', en: 'APPLY NOW' },
-    'nav.contact': { sv: 'KONTAKTA OSS', en: 'CONTACT' },
+    'nav.home': { sv: 'HEM', en: 'HOME' },
+    'nav.websites': { sv: 'HEMSIDOR', en: 'WEBSITES' },
+    'nav.marketing': { sv: 'MARKNADSFÖRING', en: 'MARKETING' },
+    'nav.team': { sv: 'TEAM', en: 'TEAM' },
+    'nav.sponsors': { sv: 'SPONSORER', en: 'SPONSORS' },
+    'nav.contact': { sv: 'KONTAKT', en: 'CONTACT' },
     'nav.login': { sv: 'LOGGA IN', en: 'LOG IN' },
     'audience.title': { sv: 'Uppgradera hemsida', en: 'Upgrade your website' },
     'marketing.title': { sv: 'Marknadsföring', en: 'Marketing' },
@@ -58,9 +60,9 @@ const translations = {
     'sponsors.title': { sv: 'SPONSORER', en: 'SPONSORS' },
     'sponsors.subtitle': { sv: 'Varumärken vi samarbetat med', en: 'Brands we’ve partnered with' },
     'sponsors.aria': { sv: 'Sponsorer loggor i loop', en: 'Sponsors logo loop' },
-    'collabs.title': { sv: 'SAMARBETEN', en: 'COLLABORATIONS' },
+    'collabs.title': { sv: 'VÅRT TEAM', en: 'COLLABORATIONS' },
     'collabs.subtitle': {
-        sv: 'Våra senaste samarbeten med våra PUSH IT-kreatörer',
+        sv: 'Möt människorna bakom Webie och vårt kreativa team.',
         en: 'Our latest partnerships with our talented PUSH IT creators'
     },
     'clients.title': { sv: 'VÅRA KUNDER', en: 'OUR CLIENTS' },
@@ -68,23 +70,23 @@ const translations = {
     'clients.alt': { sv: 'Kundlogotyp', en: 'Client logo' },
     'what.title': { sv: 'DET VI GÖR', en: 'WHAT WE DO' },
     'what.body': {
-        sv: 'PUSH IT är en dedikerad byrå som uteslutande representerar svenska influencers inom mode, inredning, skönhet och sport. Vi säkerställer högt engagemang och innehåll av toppkvalitet.',
+        sv: 'Webie bygger moderna webbupplevelser och marknadsföring som stärker varumärket och driver tillväxt.',
         en: 'PUSH IT is a dedicated agency that exclusively represents Swedish influencers in fashion, interior design, beauty, and sports. We ensure high engagement and top-quality content.'
     },
     'what.cta': { sv: 'Om oss', en: 'About us' },
     'services.1.title': { sv: 'Stöttande management & community', en: 'Supportive Management & Community' },
     'services.1.desc': {
-        sv: 'PUSH IT erbjuder dagligt stöd, månatliga uppdateringar och starka relationer för att växa ditt varumärke och koppla ihop dig med kunder för långsiktig framgång.',
+        sv: 'Vi finns nära med rådgivning, uppföljning och stöd så att ditt varumärke växer tryggt och långsiktigt.',
         en: 'PUSH IT offers daily support, monthly updates, and strong relationships to grow your brand and connect you with clients for lasting success.'
     },
     'services.2.title': { sv: 'Struktur', en: 'Structure' },
     'services.2.desc': {
-        sv: 'Vår personliga plattform håller samarbeten, deadlines och avtal i ordning så att du kan fokusera på kreativiteten.',
+        sv: 'Vi skapar tydliga processer och en smart struktur så att allt från innehåll till deadlines sitter.',
         en: 'Our personalized platform keeps your collaborations, deadlines, and agreements organized, letting you focus on creativity.'
     },
     'services.3.title': { sv: 'Brett nätverk', en: 'Wide Network' },
     'services.3.desc': {
-        sv: 'PUSH IT kopplar ihop dig med ledande kunder inom mode, sport, skönhet, inredning och mat, och breddar dina möjligheter till samarbeten.',
+        sv: 'Vi kopplar ihop dig med rätt samarbeten, kanaler och kontakter för att accelerera din tillväxt.',
         en: 'PUSH IT connects you with top clients in fashion, sport, beauty, interior, and food, expanding your opportunities for collaborations.'
     },
     'newsletter.title': { sv: 'Nyhetsbrev', en: 'Newsletter' },
@@ -582,3 +584,9 @@ window.addEventListener('load', function () {
 // Console signature
 console.log('%cBOFFO Agency', 'font-size: 24px; font-weight: bold; color: #000;');
 console.log('%cWebsite clone created with ❤️', 'font-size: 12px; color: #666;');
+// Keep footer year current.
+const yearEl = document.getElementById('currentYear');
+if (yearEl) {
+    yearEl.textContent = new Date().getFullYear();
+}
+
