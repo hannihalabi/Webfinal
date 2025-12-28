@@ -57,6 +57,8 @@ const translations = {
     },
     'creator.view': { sv: 'Visa profil', en: 'View profile' },
     'creator.seeAll': { sv: 'Se alla våra kreatörer', en: 'See all our creators' },
+    'testimonials.showMore': { sv: 'Visa fler recensioner', en: 'Show more reviews' },
+    'testimonials.showLess': { sv: 'Visa färre recensioner', en: 'Show fewer reviews' },
     'sponsors.title': { sv: 'SPONSORER', en: 'SPONSORS' },
     'sponsors.subtitle': { sv: 'Varumärken vi samarbetat med', en: 'Brands we’ve partnered with' },
     'sponsors.aria': { sv: 'Sponsorer loggor i loop', en: 'Sponsors logo loop' },
@@ -124,6 +126,9 @@ document.addEventListener('DOMContentLoaded', function () {
     // Testimonials Marquee (Mobile)
     initTestimonialsMarquee();
 
+    // Testimonials Toggle (Desktop)
+    initTestimonialsToggle();
+
     // Language Toggle (sv/en)
     initLanguageToggle();
 
@@ -188,6 +193,32 @@ function initTestimonialsMarquee() {
     } else {
         mediaQuery.addListener(update);
     }
+}
+
+function initTestimonialsToggle() {
+    const testimonialsSection = document.querySelector('.testimonials');
+    if (!testimonialsSection) return;
+
+    const toggleButton = testimonialsSection.querySelector('.testimonials-toggle');
+    if (!toggleButton) return;
+
+    const updateLabel = (collapsed) => {
+        const key = collapsed ? 'testimonials.showMore' : 'testimonials.showLess';
+        toggleButton.dataset.i18n = key;
+        toggleButton.textContent = translate(key, toggleButton.textContent);
+        toggleButton.setAttribute('aria-expanded', String(!collapsed));
+    };
+
+    const setCollapsed = (collapsed) => {
+        testimonialsSection.dataset.collapsed = collapsed ? 'true' : 'false';
+        updateLabel(collapsed);
+    };
+
+    setCollapsed(testimonialsSection.dataset.collapsed !== 'false');
+
+    toggleButton.addEventListener('click', () => {
+        setCollapsed(testimonialsSection.dataset.collapsed === 'false');
+    });
 }
 
 function initLanguageToggle() {

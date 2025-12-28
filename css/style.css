@@ -522,7 +522,7 @@ button {
     width: min(100%, 520px);
     height: auto;
     margin: 0.75rem auto 0;
-    border-radius: 40px;
+    border-radius: 45px;
     box-shadow: 0 12px 30px rgba(135, 51, 85, 0.18);
     object-fit: cover;
 }
@@ -533,7 +533,7 @@ button {
 }
 
 .audience-video--fashion {
-    border-radius: 45px;
+    border-radius: 50px;
 }
 
 .audience-lottie {
@@ -617,6 +617,12 @@ button {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
     gap: 2rem;
+}
+
+.testimonials-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
 }
 
 .creator-card {
@@ -734,6 +740,7 @@ button {
 
 .sponsors .clients-track {
     gap: 1.5rem;
+    animation-duration: 18s;
 }
 
 .collaborations-header {
@@ -855,6 +862,7 @@ button {
     gap: 4rem;
     width: max-content;
     animation: marquee 30s linear infinite;
+    will-change: transform;
 }
 
 .clients-track:hover {
@@ -863,11 +871,11 @@ button {
 
 @keyframes marquee {
     0% {
-        transform: translateX(-50%);
+        transform: translateX(0);
     }
 
     100% {
-        transform: translateX(0);
+        transform: translateX(-50%);
     }
 }
 
@@ -1204,9 +1212,28 @@ body.modal-open {
 }
 
 /* Responsive Design */
+@media (min-width: 1025px) {
+    .audiance-class .audience-video {
+        width: min(100%, 330px);
+    }
+
+    .marketing-class .audience-video {
+        width: min(100%, 560px);
+        aspect-ratio: 16 / 9;
+    }
+
+    .testimonials[data-collapsed="true"] .testimonials-grid .creator-card:nth-child(n+9) {
+        display: none;
+    }
+}
+
 @media (max-width: 1024px) {
     .testimonials-grid {
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+
+    .testimonials-actions {
+        display: none;
     }
 }
 
@@ -1269,7 +1296,7 @@ body.modal-open {
 
     /* Faster logo loop on mobile (Sponsors only) */
     .sponsors .clients-track {
-        animation-duration: 12s;
+        animation-duration: 10s;
         gap: 1rem;
     }
 
