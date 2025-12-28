@@ -529,6 +529,7 @@ button {
 
 .marketing-class .audience-video {
     aspect-ratio: 9 / 16;
+    cursor: pointer;
 }
 
 .audience-video--fashion {
@@ -566,29 +567,29 @@ button {
     font-size: 0.95rem;
 }
 
-/* Creators Grid */
-.creators {
+/* Testimonials Grid */
+.testimonials {
     padding: var(--spacing-xl) 0;
 }
 
-.creators.is-marquee {
+.testimonials.is-marquee {
     overflow: hidden;
 }
 
-.creators.is-marquee .creators-grid {
+.testimonials.is-marquee .testimonials-grid {
     display: flex;
     gap: 1.5rem;
     width: max-content;
-    animation: creators-marquee 48s linear infinite;
+    animation: testimonials-marquee 48s linear infinite;
     will-change: transform;
 }
 
-.creators.is-marquee .creator-card {
+.testimonials.is-marquee .creator-card {
     flex: 0 0 auto;
     width: 240px;
 }
 
-@keyframes creators-marquee {
+@keyframes testimonials-marquee {
     0% {
         transform: translateX(0);
     }
@@ -599,7 +600,7 @@ button {
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .creators.is-marquee .creators-grid {
+    .testimonials.is-marquee .testimonials-grid {
         animation: none;
         overflow-x: auto;
         width: 100%;
@@ -607,12 +608,12 @@ button {
         scroll-snap-type: x mandatory;
     }
 
-    .creators.is-marquee .creator-card {
+    .testimonials.is-marquee .creator-card {
         scroll-snap-align: start;
     }
 }
 
-.creators-grid {
+.testimonials-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
     gap: 2rem;
@@ -1110,7 +1111,7 @@ button {
 
 /* Responsive Design */
 @media (max-width: 1024px) {
-    .creators-grid {
+    .testimonials-grid {
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     }
 }
@@ -1178,7 +1179,7 @@ button {
         gap: 1rem;
     }
 
-    .creators-grid {
+    .testimonials-grid {
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         gap: 1.5rem;
     }
@@ -1231,7 +1232,7 @@ button {
         font-size: 2.5rem;
     }
 
-    .creators-grid {
+    .testimonials-grid {
         grid-template-columns: 1fr;
     }
 
