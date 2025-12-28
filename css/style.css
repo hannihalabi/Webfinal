@@ -1081,6 +1081,100 @@ button {
     text-decoration: underline;
 }
 
+body.modal-open {
+    overflow: hidden;
+}
+
+.modal {
+    position: fixed;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    padding: 1.5rem;
+    background: rgba(0, 0, 0, 0.55);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--transition-base);
+    z-index: 2000;
+}
+
+.modal.is-open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-dialog {
+    position: relative;
+    width: min(92vw, 520px);
+    background: var(--color-antique);
+    color: var(--color-text);
+    border-radius: 20px;
+    padding: 2rem;
+    border: 1px solid var(--color-border);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25);
+}
+
+.modal-title {
+    font-size: 1.5rem;
+    margin-bottom: 0.25rem;
+}
+
+.modal-subtitle {
+    color: var(--color-text-light);
+    margin-bottom: 1rem;
+}
+
+.modal-form {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.modal-label {
+    font-weight: 600;
+}
+
+.modal-input {
+    padding: 0.85rem 1rem;
+    border-radius: 12px;
+    border: 1px solid var(--color-border);
+    background: var(--color-white);
+    font-family: inherit;
+    font-size: 1rem;
+    color: var(--color-text);
+}
+
+.modal-input:focus {
+    outline: none;
+    border-color: var(--color-plum);
+    box-shadow: 0 0 0 3px rgba(135, 51, 85, 0.15);
+}
+
+.modal-submit {
+    width: 100%;
+    margin-top: 0.5rem;
+}
+
+.modal-close {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(135, 51, 85, 0.1);
+    color: var(--color-plum);
+    font-size: 1.25rem;
+    line-height: 1;
+    display: grid;
+    place-items: center;
+    transition: background-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.modal-close:hover {
+    background: rgba(135, 51, 85, 0.2);
+    transform: scale(1.05);
+}
+
 /* Animations */
 .fade-in {
     animation: fadeIn 1s ease-out;

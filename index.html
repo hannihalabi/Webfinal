@@ -2161,7 +2161,26 @@
 
 
 
+    <div class="modal" id="bookingModal" aria-hidden="true" hidden>
+        <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle">
+            <button class="modal-close" type="button" data-modal-close aria-label="Stäng popup">&times;</button>
+            <h3 class="modal-title" id="bookingModalTitle">Boka möte</h3>
+            <p class="modal-subtitle">Fyll i dina uppgifter så återkommer vi.</p>
+            <form class="modal-form" action="https://formsubmit.co/hanni.halabi@icloud.com" method="POST">
+                <label class="modal-label" for="bookingName">Namn</label>
+                <input class="modal-input" type="text" id="bookingName" name="name" autocomplete="name" required>
 
+                <label class="modal-label" for="bookingEmail">E-post</label>
+                <input class="modal-input" type="email" id="bookingEmail" name="email" autocomplete="email" required>
+
+                <label class="modal-label" for="bookingPhone">Telefon</label>
+                <input class="modal-input" type="tel" id="bookingPhone" name="phone" autocomplete="tel" inputmode="tel"
+                    required>
+
+                <button class="btn-primary modal-submit" type="submit">Skicka</button>
+            </form>
+        </div>
+    </div>
 
 
 
@@ -2178,8 +2197,6 @@
 
 
 </html>
-
-
 
 
 

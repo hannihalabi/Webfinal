@@ -115,6 +115,9 @@ document.addEventListener('DOMContentLoaded', function () {
     // Marketing Videos - Click to play with sound fullscreen
     initMarketingVideoFullscreen();
 
+    // Booking modal for meeting requests
+    initBookingModal();
+
     // Audience Selector (Creators / Companies)
     initAudienceSelector();
 
@@ -402,6 +405,60 @@ function initMarketingVideoFullscreen() {
     document.addEventListener('webkitfullscreenchange', () => {
         if (document.webkitFullscreenElement) return;
         videos.forEach(resetVideo);
+    });
+}
+
+function initBookingModal() {
+    const modal = document.getElementById('bookingModal');
+    if (!modal) return;
+
+    const triggers = document.querySelectorAll('a.btn-primary[href="#contact"]');
+    if (!triggers.length) return;
+
+    const closeButtons = modal.querySelectorAll('[data-modal-close]');
+    const firstInput = modal.querySelector('input, select, textarea, button');
+    let lastFocusedElement = null;
+
+    function openModal(event) {
+        if (event) event.preventDefault();
+        lastFocusedElement = document.activeElement;
+        modal.hidden = false;
+        modal.classList.add('is-open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('modal-open');
+
+        if (firstInput) {
+            requestAnimationFrame(() => firstInput.focus());
+        }
+    }
+
+    function closeModal() {
+        modal.classList.remove('is-open');
+        modal.setAttribute('aria-hidden', 'true');
+        modal.hidden = true;
+        document.body.classList.remove('modal-open');
+
+        if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
+            lastFocusedElement.focus();
+        }
+    }
+
+    triggers.forEach(trigger => {
+        trigger.addEventListener('click', openModal);
+    });
+
+    closeButtons.forEach(button => {
+        button.addEventListener('click', closeModal);
+    });
+
+    modal.addEventListener('click', (event) => {
+        if (event.target === modal) closeModal();
+    });
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && modal.classList.contains('is-open')) {
+            closeModal();
+        }
     });
 }
 
