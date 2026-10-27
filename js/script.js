@@ -138,6 +138,12 @@ document.addEventListener('DOMContentLoaded', function () {
     // Scroll Animations
     initScrollAnimations();
 
+    // Introduce the first day when its heading comes into view
+    initClaraSchedule();
+
+    // Course comparison carousel indicator
+    initCourseComparison();
+
     // Newsletter Form
     initNewsletterForm();
 
@@ -551,6 +557,126 @@ function initScrollAnimations() {
     fadeElements.forEach(el => observer.observe(el));
 }
 
+function initClaraSchedule() {
+    const schedule = document.querySelector('.clara-schedule');
+    const days = schedule ? Array.from(schedule.querySelectorAll('.clara-schedule-day')) : [];
+    if (!days.length) return;
+
+    const summaries = days.map(day => day.querySelector('summary'));
+    let activeIndex = -1;
+    let pendingFrame = false;
+    let lastScrollY = window.scrollY;
+
+    function selectDay(index, open = true) {
+        // Anchor the visible heading while the previous day's content collapses.
+        const anchor = activeIndex >= 0 && index < activeIndex
+            ? summaries[activeIndex] : summaries[index];
+        const anchorTop = anchor.getBoundingClientRect().top;
+
+        days.forEach((day, dayIndex) => {
+            day.open = dayIndex === index && open;
+        });
+        activeIndex = index;
+
+        const shift = anchor.getBoundingClientRect().top - anchorTop;
+        if (Math.abs(shift) > 1) {
+            window.scrollBy({ top: shift, behavior: 'instant' });
+        }
+        lastScrollY = window.scrollY;
+    }
+
+    function updateFromScroll() {
+        pendingFrame = false;
+        const readingLine = window.innerHeight * 0.55;
+        const scheduleBounds = schedule.getBoundingClientRect();
+        if (scheduleBounds.bottom < 0 || scheduleBounds.top > window.innerHeight) return;
+
+        // Keep keyboard interaction in control until focus leaves the heading.
+        if (summaries.some(summary => summary.matches(':focus-visible'))) return;
+
+        let nextIndex = -1;
+        summaries.forEach((summary, index) => {
+            if (summary.getBoundingClientRect().top <= readingLine) nextIndex = index;
+        });
+
+        if (nextIndex < 0 && activeIndex > 0) nextIndex = activeIndex - 1;
+
+        if (nextIndex >= 0 && nextIndex !== activeIndex) {
+            const adjacentIndex = activeIndex + Math.sign(nextIndex - activeIndex);
+            selectDay(activeIndex < 0 ? 0 : adjacentIndex);
+        }
+    }
+
+    function queueUpdate() {
+        if (pendingFrame) return;
+        pendingFrame = true;
+        window.requestAnimationFrame(updateFromScroll);
+    }
+
+    window.addEventListener('scroll', function () {
+        // Ignore the scroll adjustment made to preserve the reader's position.
+        if (Math.abs(window.scrollY - lastScrollY) < 1) return;
+        lastScrollY = window.scrollY;
+        queueUpdate();
+    }, { passive: true });
+    window.addEventListener('resize', queueUpdate);
+
+    summaries.forEach((summary, index) => {
+        summary.addEventListener('click', function (event) {
+            event.preventDefault();
+            selectDay(index, !days[index].open);
+        });
+    });
+
+    queueUpdate();
+}
+
+function initCourseComparison() {
+    const reveal = document.querySelector('.comparison-reveal');
+    const range = reveal ? reveal.querySelector('.comparison-reveal-range') : null;
+
+    if (!reveal || !range) return;
+
+    const updateReveal = function () {
+        const courseShare = Number(range.value);
+        const schoolShare = 100 - courseShare;
+        reveal.style.setProperty('--comparison-position', `${courseShare}%`);
+        range.setAttribute('aria-valuetext', `${courseShare} procent intensivkurs och ${schoolShare} procent andra utbildningar`);
+    };
+
+    const stopHinting = function () {
+        reveal.classList.remove('is-hinting');
+        reveal.classList.add('has-interacted');
+        updateReveal();
+    };
+
+    range.addEventListener('pointerdown', stopHinting, { once: true });
+    range.addEventListener('keydown', stopHinting, { once: true });
+    range.addEventListener('input', function () {
+        stopHinting();
+        updateReveal();
+    });
+
+    reveal.addEventListener('animationend', function (event) {
+        if (event.animationName === 'comparison-reveal-nudge') {
+            reveal.classList.remove('is-hinting');
+        }
+    });
+
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        const hintObserver = new IntersectionObserver(function (entries) {
+            if (entries.some(entry => entry.isIntersecting) && !reveal.classList.contains('has-interacted')) {
+                reveal.classList.add('is-hinting');
+                hintObserver.disconnect();
+            }
+        }, { threshold: 0.4 });
+
+        hintObserver.observe(reveal);
+    }
+
+    updateReveal();
+}
+
 // Newsletter Form Handling
 function initNewsletterForm() {
     const newsletterForm = document.getElementById('newsletterForm');
@@ -621,41 +747,60 @@ function showMessage(input, message, type) {
 // Header Scroll Effect
 function initHeaderScroll() {
     const header = document.getElementById('header');
-    let lastScroll = 0;
+    const hero = document.querySelector('.hero');
+    const studentIntro = document.querySelector('.student-stories-intro');
+    let lastScroll = window.pageYOffset;
+    let isHiddenForFocus = false;
     let ticking = false;
 
     if (!header) return;
 
-    window.addEventListener('scroll', function () {
+    const updateHeader = function () {
+        const currentScroll = window.pageYOffset;
+
+        if (!hero) {
+            header.classList.add('header-visible', 'header-scrolled');
+            lastScroll = currentScroll;
+            return;
+        }
+
+        const isScrollingUp = currentScroll < lastScroll;
+        const isScrollingDown = currentScroll > lastScroll;
+
+        if (isScrollingUp) {
+            isHiddenForFocus = false;
+        } else if (isScrollingDown && studentIntro) {
+            const introBottom = studentIntro.getBoundingClientRect().bottom + currentScroll;
+            if (currentScroll + header.offsetHeight >= introBottom) {
+                isHiddenForFocus = true;
+            }
+        }
+
+        if (currentScroll <= 8) {
+            isHiddenForFocus = false;
+        }
+
+        header.classList.toggle('header-visible', currentScroll > 8 && !isHiddenForFocus);
+
+        const heroBottom = hero.offsetTop + hero.offsetHeight;
+        const isPastHero = currentScroll + header.offsetHeight >= heroBottom;
+        header.classList.toggle('header-scrolled', isPastHero);
+        lastScroll = currentScroll;
+    };
+
+    const requestHeaderUpdate = function () {
         if (!ticking) {
             window.requestAnimationFrame(function () {
-                handleHeaderScroll(header, lastScroll);
-                lastScroll = window.pageYOffset;
+                updateHeader();
                 ticking = false;
             });
             ticking = true;
         }
-    });
-}
+    };
 
-function handleHeaderScroll(header, lastScroll) {
-    const currentScroll = window.pageYOffset;
-
-    // Hide header on scroll down, show on scroll up
-    if (currentScroll > lastScroll && currentScroll > 100) {
-        // Scrolling down
-        header.style.transform = 'translateY(-100%)';
-    } else {
-        // Scrolling up
-        header.style.transform = 'translateY(0)';
-    }
-
-    // Add shadow on scroll
-    if (currentScroll > 50) {
-        header.classList.add('header-scrolled');
-    } else {
-        header.classList.remove('header-scrolled');
-    }
+    updateHeader();
+    window.addEventListener('scroll', requestHeaderUpdate, { passive: true });
+    window.addEventListener('resize', requestHeaderUpdate);
 }
 
 // Smooth Scroll for Anchor Links
