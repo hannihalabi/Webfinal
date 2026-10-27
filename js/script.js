@@ -547,28 +547,42 @@ function initMobileMenu() {
 
     if (!menuToggle || !mobileMenu) return;
 
+    function setMenuOpen(open) {
+        menuToggle.classList.toggle('active', open);
+        mobileMenu.classList.toggle('active', open);
+        mobileMenu.inert = !open;
+        menuToggle.setAttribute('aria-expanded', String(open));
+        menuToggle.setAttribute('aria-label', open ? 'Stäng meny' : 'Öppna meny');
+        document.body.style.overflow = open ? 'hidden' : '';
+    }
+
     menuToggle.addEventListener('click', function () {
-        menuToggle.classList.toggle('active');
-        mobileMenu.classList.toggle('active');
-        document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+        setMenuOpen(!mobileMenu.classList.contains('active'));
     });
 
     // Close menu when clicking a link
     mobileNavLinks.forEach(link => {
         link.addEventListener('click', function () {
-            menuToggle.classList.remove('active');
-            mobileMenu.classList.remove('active');
-            document.body.style.overflow = '';
+            setMenuOpen(false);
         });
     });
 
     // Close menu when clicking outside
     mobileMenu.addEventListener('click', function (e) {
         if (e.target === mobileMenu) {
-            menuToggle.classList.remove('active');
-            mobileMenu.classList.remove('active');
-            document.body.style.overflow = '';
+            setMenuOpen(false);
         }
+    });
+
+    document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape' && mobileMenu.classList.contains('active')) {
+            setMenuOpen(false);
+            menuToggle.focus();
+        }
+    });
+
+    window.matchMedia('(min-width: 769px)').addEventListener('change', event => {
+        if (event.matches) setMenuOpen(false);
     });
 }
 
@@ -848,7 +862,8 @@ function initHeaderScroll() {
             isHiddenForFocus = false;
         }
 
-        header.classList.toggle('header-visible', currentScroll > 8 && !isHiddenForFocus);
+        const menuOpen = document.getElementById('mobileMenu')?.classList.contains('active');
+        header.classList.toggle('header-visible', currentScroll <= 8 || menuOpen || !isHiddenForFocus);
 
         const heroBottom = hero.offsetTop + hero.offsetHeight;
         const isPastHero = currentScroll + header.offsetHeight >= heroBottom;

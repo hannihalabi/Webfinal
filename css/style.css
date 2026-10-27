@@ -3086,6 +3086,208 @@ button {
     color: var(--color-text-light);
 }
 
+/* Navigation for the course landing page */
+.header--current {
+    background: rgba(255, 250, 245, 0.97);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.header--current .logo,
+.header--current .nav-link {
+    color: var(--color-plum);
+}
+
+.header--current .menu-toggle span {
+    background: var(--color-plum);
+}
+
+.header--current .nav-list {
+    gap: 1.5rem;
+}
+
+.header--current .nav-link {
+    font-size: 0.8rem;
+    letter-spacing: 0;
+}
+
+.nav-booking {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.65rem 1rem;
+    border-radius: 999px;
+    color: var(--color-white);
+    background: var(--color-plum);
+    font-size: 0.82rem;
+    font-weight: 600;
+}
+
+.mobile-menu--current {
+    max-height: calc(100dvh - var(--header-height) - var(--discount-banner-height));
+    overflow-y: auto;
+    padding: 1rem 1.5rem 1.5rem;
+    border-radius: 0 0 24px 24px;
+    box-shadow: 0 20px 35px rgba(87, 39, 58, 0.08);
+}
+
+.mobile-menu--current .mobile-nav-list {
+    gap: 0;
+}
+
+.mobile-menu--current .mobile-nav-list .mobile-nav-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.9rem 0;
+    border-bottom: 1px solid var(--color-border);
+    font-size: 1.05rem;
+    letter-spacing: 0;
+}
+
+.mobile-nav-number {
+    color: var(--color-text-light);
+    font-size: 0.7rem;
+}
+
+.mobile-nav-arrow {
+    margin-left: auto;
+    color: var(--color-coral);
+}
+
+.mobile-menu--current .mobile-booking {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.9rem;
+    margin-top: 1.25rem;
+    border-radius: 999px;
+    color: var(--color-white);
+    background: var(--color-plum);
+    font-size: 0.9rem;
+    letter-spacing: 0;
+}
+
+.mobile-booking-note {
+    margin-top: 0.6rem;
+    color: var(--color-text-light);
+    text-align: center;
+    font-size: 0.72rem;
+}
+
+.header--current a:focus-visible,
+.mobile-menu--current a:focus-visible,
+.footer--current a:focus-visible {
+    outline: 2px solid var(--color-coral);
+    outline-offset: 4px;
+}
+
+.footer--current .footer-invitation {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    align-items: center;
+    gap: 2rem;
+    padding-bottom: 3rem;
+    margin-bottom: 3rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+    text-align: center;
+}
+
+.footer--current .footer-invitation h2 {
+    margin-bottom: 0.8rem;
+    color: var(--color-white);
+}
+
+.footer-invitation p,
+.footer-description {
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 0.92rem;
+    line-height: 1.65;
+}
+
+.footer-booking-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.7rem;
+}
+
+.footer-booking {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1rem 1.8rem;
+    border-radius: 999px;
+    color: #57273a;
+    background: var(--color-antique);
+    font-weight: 700;
+}
+
+.footer-booking-wrap > span {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.72rem;
+}
+
+.footer--current .footer-content {
+    grid-template-columns: 1.2fr 0.8fr 1fr;
+    gap: 2rem;
+    text-align: center;
+}
+
+.footer--current .footer-logo {
+    margin-bottom: 0.75rem;
+    font-size: 2rem;
+}
+
+.footer--current .footer-group-title {
+    margin-bottom: 1rem;
+    color: var(--color-white);
+    font-size: 0.95rem;
+}
+
+.footer--current .footer-nav-list {
+    gap: 0.65rem;
+    align-items: center;
+}
+
+.footer-email,
+.footer-contact-link {
+    display: block;
+    width: fit-content;
+    margin: 0.8rem auto 0;
+    color: var(--color-white);
+    font-size: 0.85rem;
+    overflow-wrap: anywhere;
+}
+
+.footer-contact-link {
+    color: var(--color-antique);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+.footer--current .footer-bottom {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.75rem;
+}
+
+@media (max-width: 768px) {
+    .footer--current .footer-invitation,
+    .footer--current .footer-content {
+        grid-template-columns: 1fr;
+    }
+
+    .footer--current .footer-content {
+        gap: 2rem;
+    }
+
+    .footer--current .footer-description {
+        max-width: 340px;
+        margin-inline: auto;
+    }
+}
+
 /* Footer */
 .footer {
     background-color: var(--color-plum);
