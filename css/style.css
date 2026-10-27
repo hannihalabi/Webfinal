@@ -17,9 +17,9 @@
     --color-coral: #F28266; /* Coral */
 
     /* Semantic Colors */
-    --color-bg: var(--color-antique);
+    --color-bg: #fffaf5;
     --color-text: var(--color-plum);
-    --color-text-light: rgba(135, 51, 85, 0.7);
+    --color-text-light: #6b4656;
     --color-border: rgba(135, 51, 85, 0.18);
     --color-white: #FFFFFF;
     --color-black: #000000;
@@ -297,7 +297,7 @@ button {
 }
 
 .header.header-scrolled {
-    background-color: rgba(252, 233, 210, 0.92);
+    background-color: rgba(255, 250, 245, 0.96);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     box-shadow: 0 2px 14px rgba(135, 51, 85, 0.08);
@@ -342,7 +342,7 @@ button {
     font-weight: 600;
     line-height: 1.2;
     letter-spacing: 0.025em;
-    background: linear-gradient(90deg, rgba(135, 51, 85, 0.97), rgba(168, 55, 92, 0.97));
+    background: var(--color-plum);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
 }
@@ -485,7 +485,7 @@ button {
     top: calc(var(--header-height) + var(--discount-banner-height));
     left: 0;
     right: 0;
-    background-color: var(--color-antique);
+    background-color: var(--color-bg);
     transform: translateY(-100%);
     opacity: 0;
     visibility: hidden;
@@ -774,7 +774,7 @@ button {
 
 /* Clara's Journey */
 .clara-journey {
-    padding: 0 0 var(--spacing-xl);
+    padding: 0 0 2rem;
     background: var(--color-white);
 }
 
@@ -1248,12 +1248,12 @@ button {
     position: relative;
     padding: var(--spacing-xl) 0;
     overflow: hidden;
-    color: var(--color-white);
-    background: var(--color-plum);
+    color: var(--color-plum);
+    background: var(--color-bg);
 }
 
 .course-comparison::before {
-    content: "";
+    content: none;
     position: absolute;
     width: min(62vw, 860px);
     aspect-ratio: 1;
@@ -1274,8 +1274,8 @@ button {
 
 .course-comparison-statement {
     max-width: 1050px;
-    margin: 0 auto clamp(2rem, 5vw, 4rem);
-    color: var(--color-white);
+    margin: 0 auto 1.25rem;
+    color: var(--color-plum);
     text-align: center;
     font-family: var(--font-heading);
     font-size: clamp(2.4rem, 5.5vw, 5.25rem);
@@ -1526,14 +1526,14 @@ button {
 
 .comparison-reveal {
     position: relative;
-    width: 100%;
+    width: calc(100% - 1.5rem);
     max-width: 820px;
     height: 760px;
     margin: 0 auto;
     overflow: visible;
-    border: 1px solid rgba(255, 255, 255, 0.25);
+    border: 1px solid var(--color-border);
     border-radius: 36px;
-    box-shadow: 0 24px 65px rgba(46, 8, 27, 0.24);
+    box-shadow: 0 14px 36px rgba(87, 39, 58, 0.06);
     isolation: isolate;
 }
 
@@ -1542,9 +1542,14 @@ button {
 }
 
 @keyframes comparison-reveal-nudge {
-    0%, 100% { --comparison-position: 50%; }
-    22%, 30% { --comparison-position: 100%; }
-    68%, 76% { --comparison-position: 0%; }
+    0%, 20%, 100% { --comparison-position: 100%; }
+    50%, 65% { --comparison-position: 0%; }
+}
+
+.comparison-reveal-hint span {
+    display: inline-block;
+    margin-left: 0.35rem;
+    color: var(--color-plum);
 }
 
 .comparison-reveal-panel {
@@ -1562,13 +1567,13 @@ button {
 .comparison-reveal-panel--school {
     z-index: 1;
     color: #55585b;
-    background: #e5e5e3;
+    background: #eeefed;
 }
 
 .comparison-reveal-panel--webie {
     z-index: 2;
-    color: var(--color-white);
-    background: linear-gradient(145deg, var(--color-coral), var(--color-plum));
+    color: var(--color-plum);
+    background: #fff0e6;
     clip-path: inset(0 calc(100% - var(--comparison-position)) 0 0);
 }
 
@@ -1606,16 +1611,16 @@ button {
 }
 
 .comparison-reveal-panel--school .comparison-reveal-topline span {
-    color: var(--color-white);
-    background: #66696b;
+    color: #55585b;
+    background: #e0e2de;
     box-shadow: none;
     opacity: 1;
 }
 
 .comparison-reveal-panel--webie .comparison-reveal-topline strong {
-    border: 1px solid rgba(255, 255, 255, 0.4);
+    border: 1px solid var(--color-plum);
     color: var(--color-white);
-    background: rgba(87, 39, 58, 0.42);
+    background: var(--color-plum);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
 }
@@ -1689,9 +1694,9 @@ button {
 }
 
 .comparison-reveal-panel--webie .comparison-reveal-steps li > span {
-    border-color: var(--color-antique);
-    color: var(--color-plum);
-    background: var(--color-antique);
+    border-color: var(--color-plum);
+    color: var(--color-white);
+    background: var(--color-plum);
 }
 
 .comparison-reveal-steps strong {
@@ -1704,7 +1709,7 @@ button {
     max-width: 520px;
     font-size: 1.08rem;
     line-height: 1.4;
-    opacity: 0.75;
+    opacity: 0.94;
 }
 
 .comparison-reveal-outcome {
@@ -1813,12 +1818,11 @@ button {
 
 .comparison-reveal-hint {
     max-width: 820px;
-    margin: 1.25rem auto 0;
-    color: rgba(255, 255, 255, 0.75);
+    margin: 0 auto 2rem;
+    color: var(--color-text-light);
     text-align: center;
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
+    font-size: 0.85rem;
+    font-weight: 400;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1834,7 +1838,7 @@ button {
     position: relative;
     padding: var(--spacing-xl) 0;
     overflow: hidden;
-    background: linear-gradient(135deg, rgba(252, 233, 210, 0.96), rgba(172, 195, 154, 0.3));
+    background: var(--color-bg);
 }
 
 .course-investment::before,
@@ -1851,7 +1855,7 @@ button {
     height: 420px;
     top: -180px;
     right: -120px;
-    background: rgba(242, 130, 102, 0.14);
+    background: rgba(242, 130, 102, 0.05);
 }
 
 .course-investment::after {
@@ -1859,7 +1863,7 @@ button {
     height: 360px;
     bottom: -190px;
     left: -120px;
-    background: rgba(172, 195, 154, 0.28);
+    background: rgba(172, 195, 154, 0.08);
 }
 
 .course-investment .container {
@@ -1896,8 +1900,8 @@ button {
     border: 1px solid rgba(135, 51, 85, 0.14);
     border-radius: 30px;
     padding: clamp(1.5rem, 4vw, 3rem);
-    background: rgba(255, 255, 255, 0.75);
-    box-shadow: 0 24px 55px rgba(87, 39, 58, 0.1);
+    background: var(--color-white);
+    box-shadow: 0 12px 32px rgba(87, 39, 58, 0.06);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     transition: transform var(--transition-base), box-shadow var(--transition-base);
@@ -1922,7 +1926,7 @@ button {
 
 .course-package-card--travel {
     color: var(--color-white);
-    background: linear-gradient(145deg, var(--color-coral), var(--color-plum));
+    background: var(--color-plum);
     box-shadow: 0 28px 65px rgba(135, 51, 85, 0.24);
 }
 
@@ -1931,7 +1935,7 @@ button {
 }
 
 .course-package-card--extended {
-    background: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(172, 195, 154, 0.72));
+    background: #f5f2ef;
 }
 
 .course-package-topline {
@@ -1994,7 +1998,7 @@ button {
 
 .course-package-duration {
     margin-top: 0.75rem;
-    opacity: 0.76;
+    opacity: 0.9;
     font-weight: 600;
 }
 
@@ -2009,7 +2013,7 @@ button {
     font-size: 0.78rem;
     font-weight: 600;
     letter-spacing: 0.02em;
-    opacity: 0.62;
+    opacity: 0.85;
 }
 
 .course-package-original-price s {
@@ -2055,11 +2059,27 @@ button {
     margin-top: 0.55rem;
     font-size: 0.74rem;
     line-height: 1.35;
-    opacity: 0.78;
+    opacity: 0.94;
 }
 
 .course-package-code strong {
     letter-spacing: 0.08em;
+}
+
+.course-payment-methods {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.85rem;
+}
+
+.course-payment-methods img {
+    display: block;
+    width: 42px;
+    height: 27px;
+    object-fit: contain;
+    border-radius: 4px;
 }
 
 .course-package-list {
@@ -2238,7 +2258,7 @@ button {
     min-height: 3.2rem;
     border-radius: 999px;
     color: var(--color-white);
-    background: linear-gradient(120deg, var(--color-plum), #a44563);
+    background: var(--color-plum);
     font-size: 1rem;
     text-align: center;
     animation: meeting-cta-glow 3s ease-in-out infinite;
@@ -2288,6 +2308,19 @@ button {
     outline-offset: 4px;
 }
 
+.course-package-card--travel .course-package-meeting-button {
+    color: var(--color-plum);
+    background: var(--color-white);
+}
+
+.course-package-card--travel .course-package-meeting-portrait {
+    border-color: var(--color-white);
+}
+
+.course-package-card--travel .course-package-meeting-button:focus-visible {
+    outline-color: var(--color-white);
+}
+
 .course-package-accordion-content {
     padding: 0 0 1.1rem;
     color: rgba(87, 39, 58, 0.82);
@@ -2307,14 +2340,101 @@ button {
     color: var(--color-coral);
 }
 
+.course-package-card--travel .course-package-accordion,
+.course-package-card--travel .course-package-accordion details {
+    border-color: rgba(255, 255, 255, 0.22);
+}
+
+.course-package-card--travel .course-package-accordion summary {
+    color: var(--color-white);
+}
+
+.course-package-card--travel .course-package-accordion summary::after {
+    border-color: rgba(255, 255, 255, 0.4);
+    color: var(--color-white);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.course-package-card--travel .course-package-accordion details[open] summary::after {
+    color: var(--color-plum);
+    background: var(--color-white);
+}
+
+.course-package-card--travel .course-package-accordion details:not([open]) summary:hover::after {
+    border-color: var(--color-white);
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.course-package-card--travel .course-package-accordion summary:focus-visible {
+    outline-color: var(--color-white);
+}
+
+.course-package-card--travel .course-package-accordion-content {
+    color: rgba(255, 255, 255, 0.92);
+}
+
 /* Audience Selector */
 .audiance-class,
 .marketing-class {
     padding: var(--spacing-lg) 0;
 }
 
+.audiance-class {
+    padding-top: 0;
+    background: var(--color-white);
+}
+
+.project-bridge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 1.75rem;
+}
+
+.project-bridge svg {
+    width: 110px;
+    height: 55px;
+    overflow: visible;
+}
+
+.project-bridge path {
+    stroke: rgba(135, 51, 85, 0.25);
+    stroke-width: 1.5;
+    stroke-linecap: round;
+}
+
+.project-bridge circle {
+    fill: var(--color-coral);
+}
+
+.project-bridge > span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid rgba(135, 51, 85, 0.1);
+    border-radius: 999px;
+    color: var(--color-plum);
+    background: #fffaf5;
+    font-size: 0.78rem;
+    font-weight: 600;
+}
+
+.project-bridge-arrow {
+    color: var(--color-plum);
+    font-size: 1rem;
+}
+
+.marketing-class {
+    background: var(--color-bg);
+}
+
+.marketing-class .audience-card {
+    background: var(--color-white);
+}
+
 .audience-card {
-    background: linear-gradient(135deg, rgba(172, 195, 154, 0.18), rgba(252, 233, 210, 0.9));
+    background: var(--color-bg);
     border: 1px solid var(--color-border);
     border-radius: 16px;
     padding: clamp(1.25rem, 3vw, 2rem);
@@ -2350,7 +2470,7 @@ button {
     padding: 0.85rem 1.2rem;
     border-radius: 999px;
     border: 1px solid var(--color-border);
-    background-color: rgba(252, 233, 210, 0.7);
+    background-color: var(--color-white);
     color: var(--color-text);
     font-weight: 700;
     letter-spacing: 0.01em;
@@ -2379,9 +2499,115 @@ button {
     place-items: center;
 }
 
+.student-project-portrait {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 65% center;
+    border-radius: 48% 52% 46% 54% / 52% 45% 55% 48%;
+}
+
+.student-success-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    align-items: center;
+    gap: clamp(2rem, 6vw, 6rem);
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 1rem 0 3rem;
+}
+
+.student-success-copy {
+    min-width: 0;
+}
+
+.student-success-highlight {
+    position: relative;
+    white-space: nowrap;
+    background: linear-gradient(transparent 80%, rgba(242, 130, 102, 0.24) 80%, rgba(242, 130, 102, 0.24) 94%, transparent 94%);
+}
+
+.student-success-person {
+    position: relative;
+    isolation: isolate;
+    width: min(78%, 340px);
+    aspect-ratio: 1.25;
+    margin: 2rem auto 0;
+}
+
+.student-success-person::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: -0.45rem 0.6rem 0.4rem -0.45rem;
+    border: 1px solid rgba(135, 51, 85, 0.2);
+    border-radius: 50% 46% 52% 48%;
+    transform: rotate(-7deg);
+    background: #fff4ec;
+}
+
+.student-success-person figcaption {
+    position: absolute;
+    bottom: -0.6rem;
+    left: 50%;
+    width: max-content;
+    padding: 0.45rem 0.9rem;
+    border: 3px solid var(--color-white);
+    border-radius: 999px;
+    background: #f5edf1;
+    font-size: 0.8rem;
+    font-weight: 700;
+    transform: translateX(-50%) rotate(-4deg);
+}
+
+.student-success-person figcaption span {
+    font-weight: 400;
+}
+
+.student-success-demo {
+    position: relative;
+    min-width: 0;
+    isolation: isolate;
+}
+
+.student-success-demo::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: 12% -3% 10%;
+    border-radius: 48% 52% 42% 58%;
+    background: #faf4f7;
+    transform: rotate(8deg);
+}
+
+.student-success-demo .audience-video {
+    width: min(100%, 330px);
+    margin: 0 auto;
+    box-shadow: 0 18px 38px rgba(87, 39, 58, 0.09);
+}
+
+@media (max-width: 768px) {
+    .student-success-layout {
+        grid-template-columns: 1fr;
+        gap: 2.25rem;
+        padding-bottom: 1rem;
+    }
+
+    .student-success-person {
+        width: min(75%, 280px);
+        margin-top: 1.5rem;
+    }
+
+    .student-success-demo {
+        width: min(100%, 360px);
+        margin: 0 auto;
+    }
+}
+
 .audience-panel {
     width: min(720px, 100%);
-    background-color: rgba(252, 233, 210, 0.72);
+    background-color: var(--color-white);
     border: 1px solid rgba(135, 51, 85, 0.14);
     border-radius: 14px;
     padding: 1.25rem 1.25rem;
@@ -2462,6 +2688,7 @@ button {
 /* Testimonials Grid */
 .testimonials {
     padding: var(--spacing-xl) 0;
+    background: var(--color-white);
 }
 
 .testimonials.is-marquee {
@@ -2617,12 +2844,13 @@ button {
 /* Collaborations Section */
 .collaborations {
     padding: var(--spacing-xl) 0;
-    background-color: rgba(172, 195, 154, 0.18);
+    background-color: var(--color-white);
 }
 
 /* Sponsors Section */
 .sponsors {
     padding: var(--spacing-xl) 0;
+    background: var(--color-bg);
     text-align: center;
 }
 
@@ -2632,7 +2860,7 @@ button {
 
 .sponsors .clients-track {
     gap: 1.5rem;
-    animation-duration: 18s;
+    animation-duration: 36s;
 }
 
 .collaborations-header {
@@ -2801,7 +3029,7 @@ button {
 /* What We Do Section */
 .what-we-do {
     padding: var(--spacing-xxl) 0;
-    background-color: var(--color-antique);
+    background-color: var(--color-bg);
 }
 
 .what-we-do-header {
@@ -2821,7 +3049,7 @@ button {
     display: inline-block;
     padding: 1rem 2.5rem;
     background-color: var(--color-accent);
-    color: var(--color-plum);
+    color: #57273a;
     font-size: 1rem;
     font-weight: 600;
     border-radius: 50px;
@@ -3006,7 +3234,7 @@ body.modal-open {
 .modal-dialog {
     position: relative;
     width: min(92vw, 520px);
-    background: var(--color-antique);
+    background: var(--color-bg);
     color: var(--color-text);
     border-radius: 20px;
     padding: 2rem;
@@ -3220,7 +3448,7 @@ body.modal-open {
     }
 
     .clara-journey {
-        padding-bottom: var(--spacing-lg);
+        padding-bottom: 1.5rem;
     }
 
     .clara-journey-visual {
@@ -3446,7 +3674,7 @@ body.modal-open {
 
     /* Faster logo loop on mobile (Sponsors only) */
     .sponsors .clients-track {
-        animation-duration: 10s;
+        animation-duration: 30s;
         gap: 1rem;
     }
 
@@ -3627,10 +3855,120 @@ body:not(.legal-page) .footer-title {
     fill-opacity: 0.85;
 }
 
+.calendar-booking {
+    position: fixed;
+    inset: 0;
+    width: min(980px, calc(100% - 1.5rem));
+    height: min(850px, calc(100dvh - 2rem));
+    max-height: calc(100dvh - 2rem);
+    max-width: none;
+    margin: auto;
+    padding: 0;
+    border: 1px solid var(--color-border);
+    border-radius: 24px;
+    color: var(--color-plum);
+    background: var(--color-white);
+    box-shadow: 0 24px 80px rgba(48, 21, 33, 0.25);
+    overflow: hidden;
+}
+
+.calendar-booking[open] {
+    display: flex;
+    flex-direction: column;
+}
+
+.calendar-booking::backdrop {
+    background: rgba(48, 21, 33, 0.5);
+    backdrop-filter: blur(4px);
+}
+
+.calendar-booking-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.25rem;
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-bg);
+}
+
+.calendar-booking-header > div {
+    flex: 1;
+}
+
+#calendarBookingTitle {
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+}
+
+.calendar-booking-header p {
+    margin-top: 0.45rem;
+    color: var(--color-text-light);
+    font-size: 0.82rem;
+    text-align: center;
+}
+
+.calendar-booking-close {
+    flex: 0 0 2.5rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    color: var(--color-plum);
+    background: #f5edf1;
+    font-size: 1.5rem;
+}
+
+.calendar-booking-close:focus-visible {
+    outline: 2px solid var(--color-plum);
+    outline-offset: 3px;
+}
+
+.calendar-booking iframe {
+    flex: 1;
+    min-height: 0;
+    width: 100%;
+    border: 0;
+    background: var(--color-white);
+}
+
+.calendar-booking-fallback {
+    padding: 0.6rem;
+    border-top: 1px solid var(--color-border);
+    text-align: center;
+    font-size: 0.75rem;
+}
+
 /* Course schedule */
 .course-schedule {
-    padding: var(--spacing-xl) 0;
-    background: var(--color-bg);
+    padding: 0 0 var(--spacing-xl);
+    background: var(--color-white);
+}
+
+.schedule-bridge {
+    display: flex;
+    justify-content: center;
+    padding: 0 0 1.5rem;
+}
+
+.schedule-bridge svg {
+    width: 140px;
+    height: 79px;
+    overflow: visible;
+}
+
+.schedule-bridge-route {
+    stroke: rgba(135, 51, 85, 0.28);
+    stroke-width: 1.75;
+    stroke-linecap: round;
+}
+
+.schedule-bridge circle {
+    fill: var(--color-coral);
+}
+
+.schedule-bridge-tip {
+    stroke: var(--color-coral);
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
 }
 
 .course-schedule-header {
@@ -3768,6 +4106,7 @@ body:not(.legal-page) .footer-title {
 /* Overlapping avatar stack */
 .schedule-avatars {
     display: flex;
+    align-items: center;
     padding-left: 0.75rem;
 }
 
@@ -3775,6 +4114,7 @@ body:not(.legal-page) .footer-title {
     position: relative;
     z-index: calc(5 - var(--i));
     display: inline-flex;
+    flex-shrink: 0;
     align-items: flex-end;
     justify-content: center;
     width: 2.75rem;
@@ -3799,6 +4139,7 @@ body:not(.legal-page) .footer-title {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center 30%;
 }
 
 .schedule-avatar-fallback {
@@ -3811,7 +4152,48 @@ body:not(.legal-page) .footer-title {
     background: #f1f4ea;
 }
 
-.schedule-row:hover .schedule-avatar:not(.schedule-avatar--free) {
+.schedule-row--open .schedule-avatar--free,
+.schedule-row--next .schedule-avatar--free {
+    animation: available-seat-pulse 4s ease-in-out infinite;
+    animation-delay: calc(var(--i) * 0.22s);
+}
+
+@keyframes available-seat-pulse {
+    0%, 45%, 100% {
+        transform: translateY(0);
+        box-shadow: 0 0 0 0 rgba(172, 195, 154, 0);
+        border-color: var(--color-apple);
+    }
+    16% {
+        transform: translateY(-3px);
+        box-shadow: 0 0 0 4px rgba(172, 195, 154, 0.22);
+        border-color: #7f9f69;
+    }
+    32% {
+        transform: translateY(0);
+        box-shadow: 0 0 0 7px rgba(172, 195, 154, 0);
+        border-color: var(--color-apple);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .schedule-row--open .schedule-avatar--free,
+    .schedule-row--next .schedule-avatar--free {
+        animation: none;
+    }
+}
+
+.schedule-avatars .schedule-avatar--placeholder {
+    align-items: center;
+    border-width: 3px;
+    border-style: solid;
+    border-color: var(--color-white);
+    color: #7b8d6c;
+    background: #e6eadf;
+}
+
+.schedule-row:hover .schedule-avatar:not(.schedule-avatar--free),
+.schedule-row:hover .schedule-avatar--placeholder {
     transform: translateY(-3px);
 }
 
@@ -3841,7 +4223,7 @@ body:not(.legal-page) .footer-title {
 
 .schedule-status--next {
     color: var(--color-white);
-    background: linear-gradient(120deg, var(--color-plum), #a44563);
+    background: var(--color-plum);
     text-decoration: none;
     transition: transform var(--transition-fast);
 }
@@ -3864,7 +4246,7 @@ body:not(.legal-page) .footer-title {
 
 @media (max-width: 600px) {
     .course-schedule {
-        padding: var(--spacing-lg) 0;
+        padding: 0 0 var(--spacing-lg);
     }
 
     .course-schedule-header {
@@ -3939,6 +4321,10 @@ body:not(.legal-page) .footer-title {
         width: 1.6rem;
         height: 1.6rem;
         margin-left: -0.5rem;
+        border-width: 2px;
+    }
+
+    .schedule-avatars .schedule-avatar--placeholder {
         border-width: 2px;
     }
 

@@ -10,7 +10,7 @@ const translations = {
     'nav.sponsors': { sv: 'SPONSORER', en: 'SPONSORS' },
     'nav.contact': { sv: 'KONTAKT', en: 'CONTACT' },
     'nav.login': { sv: 'LOGGA IN', en: 'LOG IN' },
-    'audience.title': { sv: 'Uppgradera hemsida', en: 'Upgrade your website' },
+    'audience.title': { sv: 'Oscar byggde en e-handel som idag omsätter 4,2 miljoner om året.', en: 'Oscar built an e-commerce business that now turns over 4.2 million a year.' },
     'marketing.title': { sv: 'Marknadsföring', en: 'Marketing' },
     'marketing.subtitle': {
         sv: 'Olika paket inom marknadsföring passar olika behov, nedan finns tre alternativ av paket',
@@ -25,9 +25,9 @@ const translations = {
         sv: 'Nedan kan du välja och se skillnaden på olika format på hemsidor som passar ert varumärke bäst',
         en: 'Choose below to see the differences between website formats that fit your brand best.'
     },
-    'audience.tab.seller': { sv: 'Seller', en: 'Seller' },
-    'audience.tab.fashion': { sv: 'Fashion', en: 'Fashion' },
-    'audience.tab.webgl': { sv: '3D', en: '3D' },
+    'audience.tab.seller': { sv: 'Emil', en: 'Emil' },
+    'audience.tab.fashion': { sv: 'Emre', en: 'Emre' },
+    'audience.tab.webgl': { sv: 'Gabriel', en: 'Gabriel' },
     'audience.creators.money': { sv: 'Stilrent, pålitligt och fokuserat på det som får kunder att agera.', en: 'Clean, reliable, and focused on what gets customers to act.' },
     'audience.creators.cost': { sv: 'Vad kostar det?', en: 'What does it cost?' },
     'audience.creators.priceNoteStart': {
@@ -72,8 +72,8 @@ const translations = {
     'clients.alt': { sv: 'Kundlogotyp', en: 'Client logo' },
     'what.title': { sv: 'DET VI GÖR', en: 'WHAT WE DO' },
     'what.body': {
-        sv: 'Webie bygger moderna webbupplevelser och marknadsföring som stärker varumärket och driver tillväxt.',
-        en: 'PUSH IT is a dedicated agency that exclusively represents Swedish influencers in fashion, interior design, beauty, and sports. We ensure high engagement and top-quality content.'
+        sv: 'Webie hjälper nästa generation med produktion av digitala produkter som stärker varumärke och driver tillväxt',
+        en: 'Webie helps the next generation create digital products that strengthen brands and drive growth'
     },
     'what.cta': { sv: 'Om oss', en: 'About us' },
     'services.1.title': { sv: 'Stöttande management & community', en: 'Supportive Management & Community' },
@@ -119,6 +119,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Booking modal for meeting requests
     initBookingModal();
+
+    initScheduleBooking();
 
     // Audience Selector (Creators / Companies)
     initAudienceSelector();
@@ -445,6 +447,43 @@ function initMarketingVideoFullscreen() {
     });
 }
 
+function initScheduleBooking() {
+    const dialog = document.getElementById('calendarBookingModal');
+    const triggers = document.querySelectorAll('[data-calendar-booking]');
+    if (!dialog || !triggers.length) return;
+
+    const frame = dialog.querySelector('iframe');
+    const context = dialog.querySelector('[data-calendar-context]');
+    let lastTrigger = null;
+
+    triggers.forEach(trigger => {
+        trigger.addEventListener('click', event => {
+            event.preventDefault();
+            lastTrigger = trigger;
+            const row = trigger.closest('.schedule-row');
+            const trip = row ? row.getAttribute('aria-label').match(/Vecka (\d+) (\d{4})/) : null;
+            context.textContent = trip
+                ? `Prata med Hanni om vecka ${trip[1]}, ${trip[2]}. Välj en ledig mötestid nedan.`
+                : 'Välj en ledig mötestid med Hanni nedan.';
+            if (!frame.getAttribute('src')) frame.src = frame.dataset.src;
+            dialog.showModal();
+            document.body.classList.add('modal-open');
+        });
+    });
+
+    dialog.querySelector('[data-calendar-close]').addEventListener('click', () => dialog.close());
+    dialog.addEventListener('click', event => {
+        if (event.target !== dialog) return;
+        const bounds = dialog.getBoundingClientRect();
+        if (event.clientX < bounds.left || event.clientX > bounds.right
+            || event.clientY < bounds.top || event.clientY > bounds.bottom) dialog.close();
+    });
+    dialog.addEventListener('close', () => {
+        document.body.classList.remove('modal-open');
+        if (lastTrigger) lastTrigger.focus({ preventScroll: true });
+    });
+}
+
 function initBookingModal() {
     const modal = document.getElementById('bookingModal');
     if (!modal) return;
@@ -566,6 +605,25 @@ function initClaraSchedule() {
     let activeIndex = -1;
     let pendingFrame = false;
     let lastScrollY = window.scrollY;
+    let walkthroughComplete = false;
+
+    function completeWalkthrough() {
+        walkthroughComplete = true;
+        window.removeEventListener('scroll', onScroll);
+        window.removeEventListener('resize', queueUpdate);
+
+        // Keep the content below the journey in place as the final day closes.
+        const section = schedule.closest('section') || schedule;
+        const previousBottom = section.getBoundingClientRect().bottom;
+        days.forEach(day => { day.open = false; });
+        activeIndex = -1;
+        const shift = section.getBoundingClientRect().bottom - previousBottom;
+        if (Math.abs(shift) > 1) window.scrollBy({ top: shift, behavior: 'instant' });
+        lastScrollY = window.scrollY;
+
+        const hint = schedule.querySelector('.clara-schedule-hint');
+        if (hint) hint.textContent = 'Öppna en dag om du vill se schemat igen. Dag 4–10 är ett förslag på upplägg.';
+    }
 
     function selectDay(index, open = true) {
         // Anchor the visible heading while the previous day's content collapses.
@@ -587,6 +645,14 @@ function initClaraSchedule() {
 
     function updateFromScroll() {
         pendingFrame = false;
+        if (walkthroughComplete) return;
+
+        const passedLine = Math.min(120, window.innerHeight * 0.2);
+        if (activeIndex >= 0 && days[days.length - 1].getBoundingClientRect().bottom <= passedLine) {
+            completeWalkthrough();
+            return;
+        }
+
         const readingLine = window.innerHeight * 0.55;
         const scheduleBounds = schedule.getBoundingClientRect();
         if (scheduleBounds.bottom < 0 || scheduleBounds.top > window.innerHeight) return;
@@ -608,17 +674,19 @@ function initClaraSchedule() {
     }
 
     function queueUpdate() {
-        if (pendingFrame) return;
+        if (walkthroughComplete || pendingFrame) return;
         pendingFrame = true;
         window.requestAnimationFrame(updateFromScroll);
     }
 
-    window.addEventListener('scroll', function () {
+    function onScroll() {
         // Ignore the scroll adjustment made to preserve the reader's position.
         if (Math.abs(window.scrollY - lastScrollY) < 1) return;
         lastScrollY = window.scrollY;
         queueUpdate();
-    }, { passive: true });
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', queueUpdate);
 
     summaries.forEach((summary, index) => {
